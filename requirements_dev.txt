@@ -6,6 +6,7 @@ flask #Web App creation
 mlflow==2.2.2
 dvc
 ipykernel
+xgboost
 
 #For linting and testing
 #pytest==7.1.3
