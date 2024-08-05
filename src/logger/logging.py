@@ -2,9 +2,10 @@ import logging
 import os
 from datetime import datetime
 
-LOG_FILE = f"{datetime.now().strftime('%M_%D_%Y_%H_$M_%S')}"
+LOG_FILE = f"{datetime.now().strftime('%M_%d_%Y_%H_%M_%S')}.log"
 
 log_path = os.path.join(os.getcwd(), "logs")
+print("log_path", log_path)
 
 os.makedirs(log_path, exist_ok=True)
 
@@ -15,4 +16,4 @@ logging.basicConfig (level = logging.INFO,
                      format = "[%(asctime)s] %(lineno)d %(name)s - %(levelname)s - %(message)s"
                      )
 
-logging.info ("Test message")
+#logging.info ("Test message")
