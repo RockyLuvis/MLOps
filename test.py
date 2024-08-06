@@ -1,9 +1,10 @@
-import sys
-from src.logger.logging import logging
+import pickle
 
-try:
-    logging.info("This is my testing")
-    #a=1/0
-except Exception as e:
+def verify_pickle(file_path):
+    with open(file_path, 'rb') as file_obj:
+        obj = pickle.load(file_obj)
+        print(f"Object type from {file_path}: {type(obj)}")
+        return obj
 
-    print(sys.exc_info())
+verify_pickle('artifacts/preprocessor.pkl')
+verify_pickle('artifacts/model.pkl')
