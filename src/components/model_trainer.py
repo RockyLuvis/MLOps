@@ -68,9 +68,11 @@ class ModelTrainer:
             print (f"Best Model found, Model name : {best_model_name}")
             print ('\n=============================')
 
+            best_model = models[best_model_name]
+
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,
-                obj=best_model_name
+                obj=best_model
             )
             
 

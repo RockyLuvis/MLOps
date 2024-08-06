@@ -28,7 +28,9 @@ def save_object(file_path, obj):
 def load_object(file_path):
     try:
         with open(file_path, 'rb') as file_obj:
-            return pickle.load(file_obj)
+            obj = pickle.load(file_obj)
+            print(f"Model type: {type(obj)}")
+            return obj
     except Exception as e:
         logging.info('Exception occured in load_object function')
         raise CustomException (e, sys)
