@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/ravib/MLOps/mlruns/0/4d9253e4259448c7b54332dd78eb60d2/artifacts
+end_time: 1723064608979
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4d9253e4259448c7b54332dd78eb60d2
+run_name: nervous-fox-182
+run_uuid: 4d9253e4259448c7b54332dd78eb60d2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1723064601674
+status: 3
+tags: []
+user_id: ravib
