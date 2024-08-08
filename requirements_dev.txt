@@ -4,6 +4,12 @@ numpy
 seaborn #for visualization during EDA
 flask #Web App creation
 mlflow
+
+# The following reasons we dont use git for data management
+# Storage size : File size is huge of size GB, TB and even petabyte. Also, github will reject push if data file is > 25MB
+# Conflict resolution : Source code management is done in SVC, github. Merge conflict for millions of data set is unmanagable
+# Performance - Git push is very slow, it may fail during push. 
+# Hence git is not used for data management. Instead use DVC.
 dvc
 ipykernel
 xgboost
