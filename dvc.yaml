@@ -1,0 +1,46 @@
+#Data pipeline Reproducibility
+# Inorder to maintain different versions of the pipeline create a dvc.yaml file and define the above stages and 
+# dependencies from stage 1 -> stage 2 -> Stage 3 -> Stage 4
+# For tracking purpose use both Git and DVC. In Git we commit train.csv.dvc file ( Or any <Data>.dvc) 
+#file created by the 
+
+#$ dvc add artifacts/train.csv
+#100% Adding...|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████|1/1 [00:00,  4.17file/s]
+#To track the changes with git, run:
+#
+#       git add 'artifacts\train.csv.dvc' 'artifacts\.gitignore'
+#
+#To enable auto staging, run:
+#
+#
+#        dvc config core.autostage true
+#(new_env)
+
+# Then use Git commit and Git push to track the train.csv.dvc file ( Or any <Data>.dvc) 
+
+#Repeat the experiments and keep the different versions of <Data>.dvc in Git,, Then onwards using Git log, checkout to old commits
+# also do DVC checkout to get the specific commit data for testing and reproducing the experiment.
+
+# Use "DVC repro" comand to produce the dvc.lock file which will have hashvalues corresponding to the artifact of each stage
+# DVC repo reads the dvc.yaml file and produces dvc.lock file
+#use dvc dag to determine the dependencies between stages (Direct acyclic graph)- where there is no cycle between stages in the graph
+
+stages:
+  training:
+    cmd: python src/pipeline/training_pipeline.py 
+    deps:
+      - src/pipeline/training_pipeline.py
+      - src/components/data_ingestion.py
+      - src/components/data_transformation.py
+      - src/components/model_trainer.py
+      - src/components/model_evaluation.py
+  
+  outs:
+      - artifacts/raw.csv
+      - artifacts/test.csv
+      - artifacts/train.csv
+      - artifacts/preprocessor.pkl
+      - artifacts/model.pkl
+  
+
+

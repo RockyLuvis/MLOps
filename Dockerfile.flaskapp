@@ -1,0 +1,9 @@
+FROM python:3.8-slim-buster
+USER root
+
+COPY . /app/
+WORKDIR /app
+
+RUN apt update -y
+RUN apt-get update && pip install -r requirements_dev.txt
+CMD ["python3","app.py"]

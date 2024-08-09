@@ -53,7 +53,7 @@ class ModelEvaluation():
 
             #Specify path where to register the Model
             #pass the url here
-            mlflow.set_registry_uri("")
+            mlflow.set_registry_uri("./mystore/")
             logging.info(" Model has been registred ")
 
             tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
