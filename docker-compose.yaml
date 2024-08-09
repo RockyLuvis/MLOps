@@ -1,0 +1,25 @@
+# In order to compose multiple images
+# Docker compose up will run multiple images in a container.
+
+version: "3"
+services:
+  airflow:
+    build:
+      context: ./
+      dockerfile: dockerfile.airflow
+    image:  airflowimage
+    container_name: gemstone-prediction
+    ports:
+      - "8080:8080"
+
+# Add more images here
+# Also define the networking between the container
+# For example database container and app container communication
+  flaskapp:
+    build:
+      context: ./
+      dockerfile: dockerfile.flaskapp
+    image: flaskimage
+    container_name: gemstone-prediction
+    ports:
+      - "80:80"

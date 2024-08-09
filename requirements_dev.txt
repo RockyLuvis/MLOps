@@ -4,6 +4,7 @@ numpy
 seaborn #for visualization during EDA
 flask #Web App creation
 mlflow
+pendulum
 
 # The following reasons we dont use git for data management
 # Storage size : File size is huge of size GB, TB and even petabyte. Also, github will reject push if data file is > 25MB
