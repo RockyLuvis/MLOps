@@ -28,6 +28,9 @@ MANIFEST
 
 #Mystorage file
 Mystorage/
+airflow/
+artifacts/
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
