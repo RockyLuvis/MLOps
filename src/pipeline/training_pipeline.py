@@ -63,7 +63,7 @@ class TrainingPipeline:
     def TrainModel(self, train_arr, test_arr ):
         try:
             ModelTrainerObj = ModelTrainer()
-            ModelTrainer.initiate_model_training(train_arr, test_arr)
+            ModelTrainerObj.initiate_model_training(train_arr, test_arr)
         except CustomException as e:
             logging.info("Exception occurred during Train Model")
             raise CustomException (e, sys)

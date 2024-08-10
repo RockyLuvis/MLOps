@@ -3,23 +3,31 @@
 
 version: "3"
 services:
-  airflow:
+  air-flow:
     build:
       context: ./
       dockerfile: Dockerfile.airflow
     image:  airflowimage
-    container_name: gemstone-prediction
+    container_name: gemstone-prediction_af
     ports:
       - "8080:8080"
+    volumes:
+      - /c/Users/ravib/MLOps/airflow:/app/airflow
+    environment:
+      - AIRFLOW_HOME=/app/airflow
+      - AIRFLOW__CORE__DAGS_FOLDER=/app/airflow/dags
+      - AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=1000
+      - AIRFLOW__CORE__ENABLE_XCOM_PICKLING=true
+      - AIRFLOW__WEBSERVER__AUTHENTICATE=False
 
 # Add more images here
 # Also define the networking between the container
 # For example database container and app container communication
-  flaskapp:
+  flas-kapp:
     build:
       context: ./
       dockerfile: Dockerfile.flaskapp
     image: flaskimage
-    container_name: gemstone-prediction
+    container_name: gemstone-prediction_app
     ports:
-      - "80:80"
+      - "8000:8000"
