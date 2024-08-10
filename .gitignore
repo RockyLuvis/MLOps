@@ -28,7 +28,7 @@ MANIFEST
 
 #Mystorage file
 Mystorage/
-airflow/
+airflow/airflow.db
 artifacts/
 
 
