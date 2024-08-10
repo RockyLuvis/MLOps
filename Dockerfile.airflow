@@ -1,23 +1,46 @@
 FROM python:3.8-slim-buster
 USER root
+
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends \
+    gnupg2 \
+    dirmngr \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Update the GPG keys
+RUN apt-key adv --no-tty --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 648ACFD622F3D138 04EE7237B7D453EC \
+    && apt-get update -y
+
 RUN mkdir /app
 COPY . /app/
 WORKDIR /app/
-RUN pip3 install -r requirements_dev.txt
+
+RUN apt update -y && apt install -y --no-install-recommends && apt clean \
+&& rm -rf /var/lib/apt/lists/*
+
+# Set environment variable to avoid GPL dependency
+ENV SLUGIFY_USES_TEXT_UNIDECODE=yes
+# Install Python packages from requirements_dev.txt
+RUN python3 -m pip install --upgrade pip==23.3 \
+    && pip install -r requirements_dev.txt
+RUN pip install apache-airflow[cncf.kubernetes]
 
 #Env for airflow, airflow scripts (batch pipeline, training pipeline) are in airflow folder
 #XCOM for cross communication between DAG components
-ENV AIRFLOW_HOME="/app/airflow"
-ENV AIRFLOW_CORE_DAGBAG_IMPORT_TIMEOUT=1000
-ENV AIRFLOW_CORE_ENABLE_XCOM_PICKLING=true
+#ENV AIRFLOW_HOME="/app/airflow"
+#ENV AIRFLOW_CORE_DAGBAG_IMPORT_TIMEOUT=1000
+#ENV AIRFLOW_CORE_ENABLE_XCOM_PICKLING=true
 
 #Meta data is in inline db
 RUN airflow db init
+ENV PYTHONPATH="${PYTHONPATH}:/app"
+
 
 # Create airflow user.
-RUN airflow users create -e ravibhattinkw@gmail.com -f Raveendra -l seetharam -p admin -r Admin -u
-RUN chmod 0777 start.sh
-RUN apt update -y
+RUN airflow users create -e ravibhattinkw@gmail.com -f Raveendra -l seetharam -p raveendra -r Admin -u raveendra 
+RUN chmod +x start.sh
+#RUN apt update -y
 
 ENTRYPOINT [ "/bin/sh" ]
 CMD [ "start.sh" ]
