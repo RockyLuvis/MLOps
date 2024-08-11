@@ -29,6 +29,7 @@ MANIFEST
 #Mystorage file
 Mystorage/
 airflow/airflow.db
+airflow/airflow-webserver.pid
 artifacts/
 
 
