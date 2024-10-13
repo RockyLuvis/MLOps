@@ -25,6 +25,13 @@
 # DVC repo reads the dvc.yaml file and produces dvc.lock file
 #use dvc dag to determine the dependencies between stages (Direct acyclic graph)- where there is no cycle between stages in the graph
 
+
+#Data and Model Storage: Since data and models are large, DVC uses an external storage location (S3, GCP, Azure) to store them, 
+#rather than committing them to Git directly. For example, when you add a large dataset (*.csv) to DVC, it creates a pointer file (
+#<data_file>.dvc) that gets tracked by Git, while the actual file is uploaded to remote storage.
+
+
+
 stages:
   training:
     cmd: python src/pipeline/training_pipeline.py 
